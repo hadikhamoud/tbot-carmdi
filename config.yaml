@@ -1,0 +1,7 @@
+messages:
+  start: "Hello this is Carmdi Bot! \n You can ask me to lookup car numbers or phone numbers. \n For car numbers: write the number followed by the code (e.g. 1111 ز). \n For phone numbers: write the number without the extension. (e.g. if the number is 70/123456, send *only* 123456)."
+  searching_cars: "Searching for cars..."
+  no_results: "No results found."
+  choose_option: "Choose an option:"
+  invalid_input: "Error: Please send a valid input (number or number followed by a letter)."
+  invalid_selection: "Invalid selection."
