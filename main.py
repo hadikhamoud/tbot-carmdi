@@ -45,6 +45,19 @@ def handle_message(update: Update, context: CallbackContext) -> None:
             update.message.reply_text(config['messages']['choose_option'], reply_markup=reply_markup)
             context.user_data['results'] = results
             context.user_data['col_names'] = col_names
+    
+    elif checked_input_status == "name valid":
+        col_names, results = search_name(text)
+        if len(results) == 0:
+            update.message.reply_text(config['messages']['no_results'])
+        else:
+            names = [result[utils.NOM_PROP_INDEX] + " " + result[utils.PRENOM_PROP_INDEX] for result in results]
+            keyboard = [[InlineKeyboardButton(names[i], callback_data=str(i))] for i in range(len(results))]
+            reply_markup = InlineKeyboardMarkup(keyboard)
+            update.message.reply_text(config['messages']['choose_option'], reply_markup=reply_markup)
+            context.user_data['results'] = results
+            context.user_data['col_names'] = col_names
+
 
 
     elif checked_input_status == "invalid":

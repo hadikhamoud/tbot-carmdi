@@ -7,6 +7,8 @@ ACCEPTED_CAR_CODES = set(["A","B","Y","G","N","O","S","T","K","Z","M","C","D","J
 CAR_NUMBER_REGEX = re.compile(r'^\d+\s([A-Za-z\u0600-\u06FF]{1,2})$')
 PHONE_NUMBER_REGEX = re.compile(r'^\d{6}$')
 TEL_PROP_INDEX = 15
+PRENOM_PROP_INDEX = 11
+NOM_PROP_INDEX = 12
 
 
 def read_config(fp = 'config.yaml'):
@@ -18,6 +20,8 @@ def match_user_input(text):
         return "car"
     elif PHONE_NUMBER_REGEX.match(text):
         return "phone"
+    elif match_name_input(text):
+        return "name"
     else:
         return None
     
@@ -27,13 +31,20 @@ def match_car_code(text):
     else:
         return False
 
+def match_name_input(text):
+    if text.startswith("name "):
+        return True
+    else:
+        return False
+
 def check_user_input(text):
     matched_input = match_user_input(text)
     if matched_input == "car":
-        # if match_car_code(text):
         return "car valid"
     if matched_input == "phone":
         return "phone valid"
+    if matched_input == "name":
+        return "name valid"
     
     return "invalid"
 

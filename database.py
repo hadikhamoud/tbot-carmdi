@@ -13,12 +13,17 @@ def search_cars(value):
     data = c.fetchall()
     return col_names, data
 
-# def search_cars(query):
-#     return [f"Car result for {query}"]
 
 def search_phone_numbers(value):
     #select from CARMDI where TelProp like '%value%'
     c.execute('SELECT * FROM CARMDI WHERE TelProp LIKE ?', ('%'+value+'%',))
+    col_names = [cn[0] for cn in c.description]
+    data = c.fetchall()
+    return col_names, data
+
+def search_name(value):
+    name = value.split()[1]
+    c.execute('SELECT * FROM CARMDI WHERE Nom ILIKE ? OR Prenom ILIKE ?', ('%'+name+'%', '%'+name+'%'))
     col_names = [cn[0] for cn in c.description]
     data = c.fetchall()
     return col_names, data
